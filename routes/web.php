@@ -81,7 +81,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function ()
 {
 
 Route::get('ajax_del_products/{id}/{Product_id}', 'ProductsController@ajax_del_products');
-Route::resource('/', 'servicesController');
+Route::resource('/', 'NEWSController');
 Route::resource('services', 'servicesController');
 Route::resource('products', 'ProductsController');
 Route::resource('categoriesProducts', 'Categories_ProductsController');
@@ -97,7 +97,14 @@ Route::resource('requests', 'requestController');
 Route::resource('videos', 'videoController');
 Route::resource('images', 'imageController');
 Route::resource('openinghours', 'openinghoursController');
+
+
+
+ 
+Route::resource('categoriesNews', 'categories_newsController');
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 

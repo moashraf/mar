@@ -27,12 +27,16 @@ class News_en extends Model
     protected $dates = ['deleted_at'];
 
 
-    public $fillable = [
+   public $fillable = [
         'title',
         'description',
+		        'seo_title',
+
+        'main_img_alt',
+        'meta_description',
+        'number_of_visits',
         'id_new',
-        'last_updated_by',
-		    'status',
+ 	     'status',
         'slug'
     ];
 
@@ -53,7 +57,10 @@ class News_en extends Model
      *
      * @var array
      */
-    public static $rules = [
+     public static $rules = [
+        // 'main_img_alt' => 'required',
+       //  'meta_description' => 'required',
+       //  'number_of_visits' => 'required',
          'title' => 'required',
          'description' => 'required',
         'slug' => 'required'

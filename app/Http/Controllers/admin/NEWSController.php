@@ -63,6 +63,10 @@ class NEWSController extends AppBaseController
 		
 		
 		$validator = Validator::make($request->all(), [
+            'meta_description_en' => 'required',
+            'main_img_alt_en' => 'required',
+            'main_img_alt_ar' => 'required',
+            'meta_description_ar' => 'required',
             'title_en' => 'required',
             'slug_en' => 'required',
             'description_en' => 'required',
@@ -123,6 +127,9 @@ $input = $request->all();
         $services_ar->title = $request->title_ar;
         $services_ar->status = '1';
         $services_ar->id_new =$nEWS->id;
+        $services_ar->meta_description = $request->meta_description_ar;
+	  $services_ar->seo_title = $request->seo_title_ar;
+        $services_ar->main_img_alt = $request->main_img_alt_ar;
         $services_ar->description = $request->description_ar;
         $services_ar->slug = $request->slug_ar;
         $services_ar->save();
@@ -133,6 +140,10 @@ $input = $request->all();
         $services_en->status = '1';
         $services_en->id_new =$nEWS->id;
         $services_en->description = $request->description_en;
+        $services_en->main_img_alt = $request->main_img_alt_en;
+		   $services_en->seo_title = $request->seo_title_en;
+
+        $services_en->meta_description = $request->meta_description_en;
         $services_en->slug = $request->slug_en;
         $services_en->save();
 		
@@ -254,6 +265,10 @@ $input = $request->all();
          $services_ar->title = $request->title_ar;
         $services_ar->status = '1';
         $services_ar->id_new =$nEWS->id;
+		        $services_ar->main_img_alt = $request->main_img_alt_ar;
+						                        $services_ar->seo_title = $request->seo_title_ar;
+
+        $services_ar->meta_description = $request->meta_description_ar;
         $services_ar->description = $request->description_ar;
         $services_ar->slug = $request->slug_ar;
         $services_ar->save();
@@ -263,6 +278,10 @@ $input = $request->all();
         $services_en->title = $request->title_en;
         $services_en->status = '1';
         $services_en->id_new =$nEWS->id;
+		        $services_en->main_img_alt = $request->main_img_alt_en;
+						                        $services_en->seo_title = $request->seo_title_en;
+
+        $services_en->meta_description = $request->meta_description_en;
         $services_en->description = $request->description_en;
         $services_en->slug = $request->slug_en;
         $services_en->save();

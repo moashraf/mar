@@ -2,6 +2,8 @@
     <thead>
         <tr>
          <th>  Photo</th>
+		              <th colspan="3">created_at</th>
+
              <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -9,6 +11,7 @@
     @foreach($nEWS as $nEWS)
         <tr>
   			              <td>     <img src="{{ URL::to('/').'/images/'.$nEWS->single_photo}}"  width="50" height="50">  </td>
+            <td>{!! $nEWS->created_at !!}</td>
 
              <td>
                 {!! Form::open(['route' => ['nEWS.destroy', $nEWS->id], 'method' => 'delete']) !!}

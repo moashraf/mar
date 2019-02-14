@@ -28,6 +28,8 @@ class NEWS extends Model
 
  public $fillable = [
         'single_photo',
+        'cat_id',
+        'tag_id',
         'icon',
      ];
 
@@ -48,8 +50,10 @@ class NEWS extends Model
      * @var array
      */
     public static $rules = [
-       // 'single_photo' => 'required',
-      //'icon' => 'required',
+  //  'single_photo' => 'required',
+ //   'cat_id' => 'required',
+    //'tag_id' => 'required',
+  //  'icon' => 'required',
         // 'status' => 'required'
     ];
 
