@@ -25,6 +25,7 @@
 
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
 		
 		
@@ -38,12 +39,7 @@
 		
 
 		
- <style>
-
- 
- 
- 
- 
+<style>
   .admin_edit_ar textarea {   
 
  text-align: right!important; }
@@ -56,10 +52,98 @@
  background: #d8d8d882;
     border: 5px solid white;
     border-radius: 10px;}
-	
-	#admin_edit{    background: #d8d8d882;
+
+#admin_edit{    background: #d8d8d882;
     border: 5px solid white;
     border-radius: 10px;}
+    
+    #example_wrapper {
+        padding:20px;
+    }
+	
+	
+	
+        @import url('https://fonts.googleapis.com/css?family=Montserrat');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+            line-height: 20px;
+        }
+
+        .form-control {
+            border-top: 2px solid #222d32;
+            border-radius: 5px;
+        }
+        .form-control:focus {
+            border: 0;
+            border-bottom: 3px solid #000;
+            border-top: 1px solid transparent;
+        }
+        .skin-blue .main-header .navbar .sidebar-toggle {
+            font-size: 30px;
+        }
+        .navbar-nav>.user-menu .user-image {
+            width: 40px;
+            height: 40px;
+            margin-top: 1px;
+        }
+        .skin-blue .main-header .navbar .nav>li>a {
+            font-weight: bold;
+        }
+        
+        .col-sm-6 h1 {
+            color: #fff;
+            font-size: 18px;
+            text-transform: uppercase;
+            /*border: 1px dashed #fff;*/
+            text-align: center;
+            padding: 7px;
+            margin-bottom: 15px;
+        } 
+        
+        #admin_edit {
+            background: #222d32;
+        }
+        
+        .admin_edit_ar {
+            background: #222d32;
+        }
+        
+        .skin-blue .main-header .navbar {
+            background-color: #222d32;
+        }
+        
+        .content {
+            text-transform: capitalize;
+        }
+        
+        label {
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 3px;
+        }
+        
+        .skin-blue .main-header .logo {
+            background-color: #fff;
+            color: #333;
+        }
+        
+        .logo {
+            text-transform: uppercase;
+        }
+        
+        .skin-blue .main-header .navbar .sidebar-toggle {
+            color: #fff;
+            background: #222d32;
+            height: 51px; 
+        }
+		
+		#example_wrapper label {
+			color: #000 !important;
+		}
+    
 </style>
   
 		
@@ -200,6 +284,7 @@ Admin                </a>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+	  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     @yield('scripts')
 	    <script src="{{ asset('StreamLab/StreamLab.js') }} "></script>
@@ -222,6 +307,11 @@ Admin                </a>
             }
         }
       
+    </script>
+	   <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
     </script>
 
 

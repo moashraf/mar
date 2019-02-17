@@ -48,8 +48,13 @@ class categories_newsController extends AppBaseController
      */
     public function create()
     {
-        return view('categories_news.create');
-    }
+		
+         $categories = $this->categoriesNewsRepository->with('get_categories_news_ar_description')->all();
+// dd(  $categories->get_categories_news_ar_description);
+        return view('categories_news.create')
+            ->with('categories', $categories);
+ 			
+     }
 
     /**
      * Store a newly created categories_news in storage.
@@ -86,7 +91,7 @@ class categories_newsController extends AppBaseController
 		
 		
         $input = $request->all();
-		
+	//	dd($input);
 		
 		  if (!empty($input['single_photo'])) {
             $photoexplode = $request->single_photo->getClientOriginalName();

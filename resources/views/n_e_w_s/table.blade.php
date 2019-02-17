@@ -1,13 +1,14 @@
-<table class="table table-responsive" id="nEWS-table">
-    <thead>
-        <tr>
-         <th>  Photo</th>
-		              <th colspan="3">created_at</th>
 
-             <th colspan="3">Action</th>
-        </tr>
-    </thead>
-    <tbody>
+	 <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+            <th>  Photo</th>
+		              <th >created </th>
+
+             <th  >Action</th>
+            </tr>
+        </thead>
+       <tbody>
     @foreach($nEWS as $nEWS)
         <tr>
   			              <td>     <img src="{{ URL::to('/').'/images/'.$nEWS->single_photo}}"  width="50" height="50">  </td>
@@ -25,4 +26,8 @@
         </tr>
     @endforeach
     </tbody>
-</table>
+        
+    </table>
+	
+	
+	 

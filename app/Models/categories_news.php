@@ -50,5 +50,15 @@ class categories_news extends Model
         
     ];
 
-    
+   public function get_categories_news_ar_description()
+{
+  
+ 
+        return $this->hasMany("App\Models\categories_news_ar", 'id_categories');
+
+		}   
+	
+	
+	
+	
 }

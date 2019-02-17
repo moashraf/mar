@@ -22,6 +22,14 @@
 <select class="form-control" name="parentid">
  
   <option value="1" selected = selected >Main</option>
+  
+   @foreach($categories as $category)
+            <option  
+			style="<?php  if($category->parentid == 1 ){    echo'color: #dd4b39;  font-weight: bold;' ;} ?>  "
+	value="{{$category->id}}">  {{$category->get_categories_news_ar_description[0]['title']}} </option>
+        @endforeach
+		
+		
 </select>
 
  </div>
@@ -69,7 +77,7 @@
 
  <div class="form-group col-sm-12">
  <h1>ar </h1> </div>
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-12">
     {!! Form::label('title', 'Title:') !!}
 	 	  <input type="text" name="title_ar" class="form-control" 
 		  value="<?php if (isset($categories_news_ar )){echo" $categories_news_ar->title ";} ?>">
@@ -77,15 +85,7 @@
  </div>
  
 <!-- Parentid Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('parentid', 'Parent :') !!}
-
-<select class="form-control" name="parentid">
  
-  <option value="1" selected = selected >Main</option>
-</select>
-
- </div>
  
  
  <div class="form-group col-sm-6">
