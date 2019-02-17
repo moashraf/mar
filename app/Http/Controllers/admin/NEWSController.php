@@ -13,6 +13,7 @@ use Response;
  use Validator;
  use App\Models\News_en;
  use App\Models\News_ar;
+ use App\Models\categories_news;
 
  
 class NEWSController extends AppBaseController
@@ -47,8 +48,13 @@ class NEWSController extends AppBaseController
      */
     public function create()
     {
-        return view('n_e_w_s.create');
-    }
+		
+		
+		 $categories = categories_news::with('get_categories_news_ar_description')->get();
+// dd(  $categories->get_categories_news_ar_description);
+        return view('n_e_w_s.create')
+            ->with('categories', $categories);
+     }
 
     /**
      * Store a newly created NEWS in storage.
@@ -184,6 +190,14 @@ $input = $request->all();
      */
     public function edit($id)
     {
+		
+		
+		
+		
+		 $categories = categories_news::with('get_categories_news_ar_description')->get();
+ 
+			
+			
         $nEWS = $this->nEWSRepository->findWithoutFail($id);
 
 		$News_ar=News_ar::where('id_new', $id)->first();
@@ -194,7 +208,9 @@ $input = $request->all();
             return redirect(route('nEWS.index'));
         }
 
-        return view('n_e_w_s.edit')->with('nEWS', $nEWS)->with('News_ar', $News_ar)->with('News_en', $News_en);
+        return view('n_e_w_s.edit')->with('nEWS', $nEWS)->with('News_ar', $News_ar)
+		->with('News_en', $News_en)
+		->with('categories', $categories);
     }
 
     /**

@@ -21,6 +21,10 @@
 	  value="<?php if (isset($News_en )){echo" $News_en->main_img_alt ";} ?>">
 
  </div> 
+ 
+ 
+
+ 
  <!------------------------------------------------->
 <div class="form-group col-sm-6">
     {!! Form::label('meta description', 'meta description:') !!}
@@ -41,6 +45,25 @@
 			  value="<?php if (isset($News_en )){echo" $News_en->seo_title ";} ?>">
 
  </div>
+ 
+  <div class="form-group col-sm-6">
+    {!! Form::label('parentid', 'categories :') !!}
+
+<select class="form-control" name="cat_id">
+ 
+  <option value="1" selected = selected >Main</option>
+  
+   @foreach($categories as $category)
+            <option  
+			style="<?php  if($category->parentid == 1 ){    echo'color: #dd4b39;  font-weight: bold;' ;} ?>  "
+	value="{{$category->id}}">  {{$category->get_categories_news_ar_description[0]['title']}} </option>
+        @endforeach
+		
+		
+</select>
+
+ </div>
+ 
 <!-- Body Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('body', 'Body:') !!}
@@ -81,7 +104,7 @@
 
 </div>
 
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-12">
     {!! Form::label('seo title', 'seo title:') !!}
 	 	  <input type="text" name="seo_title_ar" class="form-control" 
 		  value="<?php if (isset($News_ar )){echo" $News_ar->seo_title ";} ?>">

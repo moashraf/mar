@@ -173,11 +173,12 @@ class categories_newsController extends AppBaseController
      */
     public function edit($id)
     {
-        $categoriesNews = $this->categoriesNewsRepository->findWithoutFail($id);
+      
 
 
-
-		$categories_news_ar=categories_news_ar::where('id_categories', $id)->first();
+    $categories = $this->categoriesNewsRepository->with('get_categories_news_ar_description')->all();
+	$categoriesNews = $this->categoriesNewsRepository->findWithoutFail($id);
+	$categories_news_ar=categories_news_ar::where('id_categories', $id)->first();
 		$categories_news_en=categories_news_en::where('id_categories', $id)->first();
 
         if (empty($categoriesNews)) {
@@ -187,6 +188,7 @@ class categories_newsController extends AppBaseController
         }
 
         return view('categories_news.edit')
+		->with('categories', $categories)
 		->with('categoriesNews', $categoriesNews)
 		->with('categories_news_en', $categories_news_en)
 		->with('categories_news_ar', $categories_news_ar)
