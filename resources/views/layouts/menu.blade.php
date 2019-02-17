@@ -30,10 +30,12 @@
 
 
 <li class="{{ Request::is('nEWS*') ? 'active' : '' }}">
-    <a href="{!! route('nEWS.index') !!}"><i class="fa fa-edit"></i><span>blog</span></a>
+    <a href="{!! route('nEWS.index') !!}"><i class="fa fa-edit"></i><span>News</span></a>
 </li>
 
-
+<li class="{{ Request::is('categoriesNews*') ? 'active' : '' }}">
+    <a href="{!! route('categoriesNews.index') !!}"><i class="fa fa-edit"></i><span>Categories News</span></a>
+</li>
 
 
 <li class="{{ Request::is('services*') ? 'active' : '' }}">
@@ -91,7 +93,5 @@
 </li>
 
  
-<li class="{{ Request::is('categoriesNews*') ? 'active' : '' }}">
-    <a href="{!! route('categoriesNews.index') !!}"><i class="fa fa-edit"></i><span>Categories News</span></a>
-</li>
+
 
