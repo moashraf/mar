@@ -13,6 +13,7 @@ use Response;
  use Validator;
  use App\Models\News_en;
  use App\Models\News_ar;
+ use App\Models\news_photo;
  use App\Models\categories_news;
 
  
@@ -66,7 +67,7 @@ class NEWSController extends AppBaseController
     public function store(CreateNEWSRequest $request)
     {
 		
-		
+	//	dd($request->photos_id);
 		
 		$validator = Validator::make($request->all(), [
             'meta_description_en' => 'required',
@@ -93,6 +94,9 @@ class NEWSController extends AppBaseController
 		
 		
 $input = $request->all();
+
+
+
         if (!empty($input['single_photo'])) {
             $photoexplode = $request->single_photo->getClientOriginalName();
        $photoexplode = explode(".", $photoexplode);
@@ -124,37 +128,64 @@ $input = $request->all();
        $input['icon']=    'logo.png'; 
            
        }
+ 	/*  --------------------------------------------------------------------------*/ 
 
 	   
         $nEWS = $this->nEWSRepository->create($input);
 
- 	   
+ 	/*  --------------------------------------------------------------------------*/ 
+	 
+	 
 	   	$services_ar = new News_ar;
         $services_ar->title = $request->title_ar;
         $services_ar->status = '1';
         $services_ar->id_new =$nEWS->id;
         $services_ar->meta_description = $request->meta_description_ar;
-	  $services_ar->seo_title = $request->seo_title_ar;
+	   $services_ar->seo_title = $request->seo_title_ar;
         $services_ar->main_img_alt = $request->main_img_alt_ar;
         $services_ar->description = $request->description_ar;
         $services_ar->slug = $request->slug_ar;
         $services_ar->save();
 		
-			
+			 	/*  --------------------------------------------------------------------------*/ 
+
 		 	$services_en = new News_en;
         $services_en->title = $request->title_en;
         $services_en->status = '1';
         $services_en->id_new =$nEWS->id;
         $services_en->description = $request->description_en;
         $services_en->main_img_alt = $request->main_img_alt_en;
-		   $services_en->seo_title = $request->seo_title_en;
-
+		$services_en->seo_title = $request->seo_title_en;
         $services_en->meta_description = $request->meta_description_en;
         $services_en->slug = $request->slug_en;
         $services_en->save();
 		
 		
 		
+		 	/*  --------------------------------------------------------------------------*/ 
+
+		
+        if($request->photos_id){ 
+
+
+        foreach($request->photos_id as $photo1)
+        {
+        $photoexplode = $photo1->getClientOriginalName();
+        $photoexplode = explode(".", $photoexplode);
+        $namerand = rand();
+        $namerand.= $photoexplode[0];
+        $imageNameGallery = $namerand . '.' . $photo1->getClientOriginalExtension();
+        $photo1->move(base_path() . '/public/images/', $imageNameGallery);
+		
+        $news_photo = new news_photo;
+        $news_photo->news_id = $nEWS->id;
+        $news_photo->single_photo_gallery = "$imageNameGallery";
+        $news_photo->save();
+        }}
+
+
+ 	/*  --------------------------------------------------------------------------*/ 
+
 
         Flash::success('N E W S saved successfully.');
 
@@ -303,7 +334,29 @@ $input = $request->all();
         $services_en->save();
 		
 				
-				
+					/*  --------------------------------------------------------------------------*/ 
+
+		
+        if($request->photos_id){ 
+
+
+        foreach($request->photos_id as $photo1)
+        {
+        $photoexplode = $photo1->getClientOriginalName();
+        $photoexplode = explode(".", $photoexplode);
+        $namerand = rand();
+        $namerand.= $photoexplode[0];
+        $imageNameGallery = $namerand . '.' . $photo1->getClientOriginalExtension();
+        $photo1->move(base_path() . '/public/images/', $imageNameGallery);
+		
+        $news_photo = new news_photo;
+        $news_photo->news_id = $nEWS->id;
+        $news_photo->single_photo_gallery = "$imageNameGallery";
+        $news_photo->save();
+        }}
+
+
+ 	/*  --------------------------------------------------------------------------*/ 
 				
         Flash::success('N E W S updated successfully.');
 

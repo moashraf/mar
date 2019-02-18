@@ -1,6 +1,6 @@
 <!-- Title Field -->
 
-
+<?php //  dd($nEWS->get_News_Photos );?>
 <div class=" col-sm-6  " id="admin_edit">
 
  <div class="form-group col-sm-12">
@@ -163,6 +163,33 @@
     width: 50px;   height: 50px;		border-radius: 50px; margin: 15px;  " />
 
 </div>
+
+
+
+
+  <div class="form-group col-sm-6">
+    {!! Form::label('photos_id', 'Photos Id:') !!}
+    <input type="file"   name="photos_id[]" multiple    >
+	<a href="#">
+
+<?php if (isset($nEWS )){  ?>
+ @foreach($nEWS->get_News_Photos as $products_val)
+            <a href="#"  
+             class="  btn-xs"  >
+            <i class="glyphicon glyphicon-trash"></i></a>
+             <img id="Photo{{ $products_val->id }}/{{ $products_val->news_id }}" 
+			 src="{{ URL::to('/').'/images/'. $products_val->single_photo_gallery }}"  width="50" height="50"> 
+            @endforeach
+			
+			
+<?php } ?>
+	
+
+	
+	
+</div>
+
+
 
 
  	 <script  >

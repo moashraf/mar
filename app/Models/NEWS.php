@@ -90,6 +90,12 @@ if (App::isLocale('ar')) {
 
 		}
 		
+		  public function get_News_Photos()
+    {
+        return $this->hasMany('App\Models\news_photo', 'news_id');
+
+    }
+		
 		
 		
 		
