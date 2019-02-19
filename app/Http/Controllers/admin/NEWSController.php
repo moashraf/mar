@@ -396,4 +396,19 @@ $input = $request->all();
 
         return redirect(route('nEWS.index'));
     }
+	
+	
+	  public function ajax_del_news_photo($id,$news_id)
+    {
+         $news = news_photo::where('id',$id)->where('news_id',$news_id)->first();
+        
+         if (empty($news)) {
+            return back();
+        }
+        $news->delete($id);
+        return back();
+    }
+	
+	
+	
 }

@@ -170,11 +170,11 @@
   <div class="form-group col-sm-6">
     {!! Form::label('photos_id', 'Photos Id:') !!}
     <input type="file"   name="photos_id[]" multiple    >
-	<a href="#">
+	 
 
 <?php if (isset($nEWS )){  ?>
  @foreach($nEWS->get_News_Photos as $products_val)
-            <a href="#"  
+            <a href="{{ URL::to('/').'/admin/ajax_del_news_photo/'.$products_val->id.'/'.$products_val->news_id}}"  
              class="  btn-xs"  >
             <i class="glyphicon glyphicon-trash"></i></a>
              <img id="Photo{{ $products_val->id }}/{{ $products_val->news_id }}" 

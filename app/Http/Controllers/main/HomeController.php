@@ -2,25 +2,43 @@
 
 namespace App\Http\Controllers;
 
- use App\Models\services_en;
-use App\Models\services_ar;
-use App\Models\clients;
-  use App\Models\image;
-use App\Models\services;
-use App\Models\order;
-use App\Models\slider;
-use App\Models\slider_ar;
-use App\Models\slider_en;
-use App\Models\Products;
-use App\Models\types;
- use App\Models\projects;
-
+ use App\Models\NEWS;
+ 
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
 
 	
+	
+	
+		 public function index ()
+    {    
+		  $locale =\Request::segment(1) ;
+			App()->setLocale( $locale);
+		 
+		 
+  $NEWS  = NEWS::latest()->with('get_NEWS_description')->where('cat_id','=','1')->get();
+  $services  = NEWS::latest()->with('get_NEWS_description')->where('cat_id','=','2')->get();
+  $Portfolio  = NEWS::latest()->with('get_NEWS_description')->where('cat_id','=','3')->get();
+ // $slider = slider::latest()->with('get_slider_description')->get();
+  // $projects = projects::with('get_projects_description')->where('project_cat_id','=','1')->orWhere('project_cat_id','=','2')->limit(4)->get();
+    
+  		 return view('main.index',
+            [
+  				// 'slider' => $slider ,  
+				// 'projects' => $projects ,
+ 				 'NEWS' => $NEWS ,
+ 				 'Portfolio' => $Portfolio ,
+ 				 'services' => $services ,
+            ]);
+    }
+	
+	
+	
+	
+		/* //////////////////////////////////////////////////////////////////////////////////// /////////////////*/
+
 
 
   public function singel_cat($id)
@@ -47,24 +65,7 @@ class HomeController extends Controller
     }
 
 	
-	 public function index ()
-    {    
-		  $locale =\Request::segment(1) ;
-			App()->setLocale( $locale);
-		 
-		 
-  $types  = types::latest()->with('get_types_description')->get();
-  $slider = slider::latest()->with('get_slider_description')->get();
-   $projects = projects::with('get_projects_description')->where('project_cat_id','=','1')->orWhere('project_cat_id','=','2')->limit(4)->get();
-    
-  		 return view('main.index',
-            [
-  				 'slider' => $slider ,  
-				 'projects' => $projects ,
- 				 'types' => $types ,
-            ]);
-    }
-	
+
 	
 	 
 	

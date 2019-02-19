@@ -18,7 +18,7 @@ class categories_news_ar extends Model
 {
     use SoftDeletes;
 
-    public $table = 'categories_News_ar';
+    public $table = 'categories_news_ar';
          	    protected $connection = 'mysqlar';
 
 

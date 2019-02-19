@@ -18,7 +18,7 @@ class categories_news_en extends Model
 {
     use SoftDeletes;
 
-    public $table = 'categories_News_en';
+    public $table = 'categories_news_en';
     
      	    protected $connection = 'mysqlen';
 
