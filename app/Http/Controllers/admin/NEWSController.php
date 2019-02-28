@@ -67,6 +67,8 @@ class NEWSController extends AppBaseController
     public function store(CreateNEWSRequest $request)
     {
 		
+	 
+	 
 	//	dd($request->photos_id);
 		
 		$validator = Validator::make($request->all(), [
@@ -111,7 +113,7 @@ $input = $request->all();
        $input['single_photo']=    'logo.png'; 
            
        }
-	   
+	    
 	   
 	      if (!empty($input['icon'])) {
 			  //dd("fdfdf");
@@ -135,7 +137,7 @@ $input = $request->all();
 
  	/*  --------------------------------------------------------------------------*/ 
 	 
-	 
+  
 	   	$services_ar = new News_ar;
         $services_ar->title = $request->title_ar;
         $services_ar->status = '1';
@@ -144,7 +146,7 @@ $input = $request->all();
 	   $services_ar->seo_title = $request->seo_title_ar;
         $services_ar->main_img_alt = $request->main_img_alt_ar;
         $services_ar->description = $request->description_ar;
-        $services_ar->slug = $request->slug_ar;
+        $services_ar->slug =  str_replace(" ","_","$request->slug_ar");
         $services_ar->save();
 		
 			 	/*  --------------------------------------------------------------------------*/ 
@@ -157,7 +159,7 @@ $input = $request->all();
         $services_en->main_img_alt = $request->main_img_alt_en;
 		$services_en->seo_title = $request->seo_title_en;
         $services_en->meta_description = $request->meta_description_en;
-        $services_en->slug = $request->slug_en;
+        $services_en->slug =   str_replace(" ","_","$request->slug_en");
         $services_en->save();
 		
 		
@@ -317,7 +319,7 @@ $input = $request->all();
 
         $services_ar->meta_description = $request->meta_description_ar;
         $services_ar->description = $request->description_ar;
-        $services_ar->slug = $request->slug_ar;
+        $services_ar->slug =    str_replace(" ","_","$request->slug_ar")  ;
         $services_ar->save();
 		
 			
@@ -330,7 +332,7 @@ $input = $request->all();
 
         $services_en->meta_description = $request->meta_description_en;
         $services_en->description = $request->description_en;
-        $services_en->slug = $request->slug_en;
+        $services_en->slug =  str_replace(" ","_"," $request->slug_en")    ;
         $services_en->save();
 		
 				

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
  use App\Models\NEWS;
+ use App\Models\slider;
+ use App\Models\order;
  
 use Illuminate\Http\Request;
 
@@ -18,6 +20,7 @@ class HomeController extends Controller
 			App()->setLocale( $locale);
 		 
 		 
+  $slider  = slider::latest()->with('get_slider_description')->get();
   $NEWS  = NEWS::latest()->with('get_NEWS_description')->where('cat_id','=','1')->get();
   $services  = NEWS::latest()->with('get_NEWS_description')->where('cat_id','=','2')->get();
   $Portfolio  = NEWS::latest()->with('get_NEWS_description')->where('cat_id','=','3')->get();
@@ -28,6 +31,7 @@ class HomeController extends Controller
             [
   				// 'slider' => $slider ,  
 				// 'projects' => $projects ,
+ 				 'slider' => $slider ,
  				 'NEWS' => $NEWS ,
  				 'Portfolio' => $Portfolio ,
  				 'services' => $services ,
@@ -89,6 +93,33 @@ class HomeController extends Controller
 	
 	public function orders( request $request)
     {
+		
+		
+		
+       $to = "ashraf@corddigital.com";
+        $subject = " mar-decor ";
+        $neme = $_POST['title'];
+        $phone = $_POST['phone'];
+        $body = $_POST['body'];
+        $email = $_POST['email'];
+         $message="<html><head>
+<title>  mar-decor    </title>
+        </head>
+		<body><table>
+        <tr><th>Firstname</th><th>phone</th><th>email</th> <th>body</th> </tr>
+        <tr> <td>$neme  </td><td>$phone  </td><td>$email  </td> <td>$body  </td>   </tr>
+        </table></body></html>  ";
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= 'From: <info@mar-decor.com>' . "\r\n";
+
+           if(isset($_POST['phone'])){
+        if(mail($to,$subject,$message,$headers)){
+           header("Location: https://mar-decor.com/oiuh98");
+        }else{  echo "Mail Not Sent"; } } 
+		
+		
+		
         $input = $request->all();
 
         $order = order::create($input);
@@ -162,50 +193,45 @@ class HomeController extends Controller
 	
 	
 	
-	   public function news()
+	   public function all_news()
     {
 		
-		  $services = services::with('get_services_description')->get();
-
+ 
 		  
   $locale =\Request::segment(1) ;
 			App()->setLocale( $locale);
   $NEWS = NEWS::latest()->with('get_NEWS_description')->get();
  
   		  
-		   return view('main.news',
+		   return view('main.all_news',
             [
  				                  'NEWS' => $NEWS ,
- 				                  'services' => $services 
-
+ 
 				 ]);
 			 
     }
 	
 	
 	
-	   public function singel_news($id)
+	   public function singel_news($slg,$id)
     {
 		
-				  $services = services::with('get_services_description')->get();
-
- $All_NEWS = NEWS::limit(4)->get();
-
+ //dd($id);
+ 
    $locale =\Request::segment(1) ;
 			App()->setLocale( $locale);
 			
-		 
-
-  $NEWS = NEWS::where('id', $id)->first();
+   //$NEWS  = NEWS::latest()->with('get_NEWS_description')->where('cat_id','=','1')->get();
+   $NEWS = NEWS::with('get_NEWS_description')->with('get_News_Photos')  ->where('id', $id)->get();
+  
+// dd( $NEWS[0]->get_NEWS_description[0]->slug );
                 if (!is_null($NEWS)) {
                  		 return view('main.singel_news',
                         [ 
 						
 						
-						'All_NEWS' => $All_NEWS,
-						'NEWS' => $NEWS,
-						'services' => $services,
-						
+ 						'NEWS' => $NEWS,
+ 						
 						
 						]);
                 } else {
@@ -249,18 +275,14 @@ class HomeController extends Controller
     {
 		
 		
-						  $clients = clients::with('get_clients_description')->get();
-
+ 
 						  
 						  
 	   $locale =\Request::segment(1) ;
 		  App()->setLocale( $locale);
 		  
  		  
-		   return view('main.about_us',
-            [
-			'clients' => $clients , 
- 				 ]);
+		   return view('main.about_us' );
  
      }
 	
@@ -272,15 +294,11 @@ class HomeController extends Controller
 	 public function Contact()
     {
  
- 						  $services = services::with('get_services_description')->get();
-
+ 
     $locale =\Request::segment(1) ;
 		  App()->setLocale( $locale);
 		  
-		   return view('main.Contact',
-            [
-			'services' => $services , 
- 				 ]);
+		   return view('main.Contact');
 				 
 				 
  				 

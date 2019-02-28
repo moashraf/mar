@@ -25,6 +25,8 @@
   
    @foreach($categories as $category)
             <option  
+			<?php if (isset($categoriesNews )) { if($category->id == $categoriesNews->parentid ){    echo'selected = selected' ;} } ?>	
+			
 			style="<?php  if($category->parentid == 1 ){    echo'color: #dd4b39;  font-weight: bold;' ;} ?>  "
 	value="{{$category->id}}">  {{$category->get_categories_news_ar_description[0]['title']}} </option>
         @endforeach

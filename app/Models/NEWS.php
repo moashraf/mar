@@ -63,7 +63,10 @@ class NEWS extends Model
 {
 	
 	$locale = App::getLocale();
-        return \URL::to($locale.'/singel_news/').'/' .$this->id;
+   $NEWS = NEWS::with('get_NEWS_description')->where('id', $this->id)->get();
+  
+ //dd( $NEWS[0]->get_NEWS_description[0]->slug );
+        return \URL::to($locale.'/singel_news/').'/' .$NEWS[0]->get_NEWS_description[0]->slug.'/'.$this->id ;
 
 		}
 		

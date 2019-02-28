@@ -91,7 +91,7 @@ class categories_newsController extends AppBaseController
 		
 		
         $input = $request->all();
-	//	dd($input);
+	 //	dd($input);
 		
 		  if (!empty($input['single_photo'])) {
             $photoexplode = $request->single_photo->getClientOriginalName();
@@ -272,6 +272,11 @@ class categories_newsController extends AppBaseController
      */
     public function destroy($id)
     {
+		
+				if( $id == "1" || $id == "2" || $id == "3"){dd( "لا يمكن يا حبيبي") ;}
+
+
+
         $categoriesNews = $this->categoriesNewsRepository->findWithoutFail($id);
 
         if (empty($categoriesNews)) {

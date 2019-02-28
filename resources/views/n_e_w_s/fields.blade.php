@@ -51,10 +51,11 @@
 
 <select class="form-control" name="cat_id">
  
-  <option value="1" selected = selected >Main</option>
+  <option value="1"  >Main</option>
   
    @foreach($categories as $category)
             <option  
+<?php if (isset($nEWS )) { if($category->id == $nEWS->cat_id ){    echo'selected = selected' ;} }?>			
 			style="<?php  if($category->parentid == 1 ){    echo'color: #dd4b39;  font-weight: bold;' ;} ?>  "
 	value="{{$category->id}}">  {{$category->get_categories_news_ar_description[0]['title']}} </option>
         @endforeach

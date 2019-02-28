@@ -1,5 +1,13 @@
-<IfModule mod_rewrite.c>
-RewriteEngine on
-RewriteCond %{REQUEST_URI} !^public
+RewriteEngine On
+#RewriteCond %{HTTP_HOST} ^www.mar-decor.com$ [NC]
+#RewriteCond %{HTTP_HOST} ^mar-decor.com$ [NC]
+#RewriteRule ^(.*)$ https://mar-decor.com/$1 [R=301,L]
+
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^www.mar-decor.com$
+RewriteRule ^(.*) https://mar-decor.com/$1  [QSA,L,R=301]
+
 RewriteRule ^(.*)$ public/$1 [L]
-</IfModule>
+
+<IfModule mod_rewrite.c>
