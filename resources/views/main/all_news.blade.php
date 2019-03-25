@@ -2,7 +2,7 @@
 @section('content')
    
   
-				<title> {!! site_settings('Web_site_name')  !!}   </title>
+				<title> {!! site_settings('Web_site_name')  !!}   {{ trans('langsite.News')}}  </title>
 	
                
 				 

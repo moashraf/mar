@@ -5,20 +5,20 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
  
-class news_photo extends Model
+class services_photo extends Model
 {
     use SoftDeletes;
 
-    public $table = 'news_photo';
+    public $table = 'services_photo';
     
 
     protected $dates = ['deleted_at'];
 
 
     public $fillable = [
-        'news_id',
+        'services_id',
         'single_photo_gallery',
-        'icon',
+        '	',
        ];
 
     
@@ -29,7 +29,7 @@ class news_photo extends Model
      * @var array
      */
     public static $rules = [
-        'single_photo_gallery' => 'required'
+'single_photo_gallery' => 'required|mimes:jpeg,jpg,png,gif'
     ];
 
     

@@ -50,6 +50,8 @@ class NEWS extends Model
      * @var array
      */
     public static $rules = [
+	       'single_photo' => 'mimes:jpeg,jpg,png,gif',
+
   //  'single_photo' => 'required',
  //   'cat_id' => 'required',
     //'tag_id' => 'required',

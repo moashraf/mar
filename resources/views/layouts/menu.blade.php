@@ -20,9 +20,16 @@
     <a href="{!! route('nEWS.index') !!}"><i class="fa fa-edit"></i><span>News</span></a>
 </li>
 
+
+
 <li class="{{ Request::is('categoriesNews*') ? 'active' : '' }}">
     <a href="{!! route('categoriesNews.index') !!}"><i class="fa fa-edit"></i><span>Categories News</span></a>
 </li>
+
+<li class="{{ Request::is('services*') ? 'active' : '' }}">
+    <a href="{!! route('services.index') !!}"><i class="fa fa-edit"></i><span>services</span></a>
+</li>
+
  
  
 

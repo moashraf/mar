@@ -33,12 +33,17 @@ class services_en extends Model
     protected $dates = ['deleted_at'];
 
 
-    public $fillable = [
-	
-        'status',
+
+   public $fillable = [
         'title',
-        'id_services',
         'description',
+		        'seo_title',
+
+        'main_img_alt',
+        'meta_description',
+        'number_of_visits',
+        'id_services',
+ 	     'status',
         'slug'
     ];
 
@@ -54,17 +59,20 @@ class services_en extends Model
         'slug' => 'string'
     ];
 
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
     public static $rules = [
-        'title' => 'required',
-		'slug' => 'required',
-        'status' => 'required',
-        'description' => 'required'
+        // 'main_img_alt' => 'required',
+       //  'meta_description' => 'required',
+       //  'number_of_visits' => 'required',
+         'title' => 'required',
+         'description' => 'required',
+        'slug' => 'required'
     ];
+
+	   public function get_NEWS_path()
+{
+        return \URL::to('/singel_services/').'/' .$this->id;
+
+		}
 
     
 }

@@ -49,7 +49,7 @@
 						<div class="row">
 							<div class="about-intro rtl">
 								<div class="about-intro-img">
-									<img src="{{ URL::to('/').'/images/About/1.jpg'}}" class="img-responsive"    alt="{!! site_settings('Web_site_name')  !!}">
+									<img src="{{ URL::to('/').'/images/about2.jpg'}}" class="img-responsive"    alt="{!! site_settings('Web_site_name')  !!}">
 								</div>
 								<div class="about-intro-text">
 									<h2 class="text-cap">{{ trans('langsite.About')}}</h2>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
  use App\Models\NEWS;
  use App\Models\slider;
  use App\Models\order;
+ use App\Models\services;
  
 use Illuminate\Http\Request;
 
@@ -20,10 +21,10 @@ class HomeController extends Controller
 			App()->setLocale( $locale);
 		 
 		 
-  $slider  = slider::latest()->with('get_slider_description')->get();
-  $NEWS  = NEWS::latest()->with('get_NEWS_description')->where('cat_id','=','1')->get();
-  $services  = NEWS::latest()->with('get_NEWS_description')->where('cat_id','=','2')->get();
-  $Portfolio  = NEWS::latest()->with('get_NEWS_description')->where('cat_id','=','3')->get();
+  $slider  = slider::limit(5)->latest()->with('get_slider_description')->get();
+  $NEWS  = NEWS::limit(3)->latest()->with('get_NEWS_description')->where('cat_id','=','1')->get();
+  $services  = services::limit(4)->latest()->with('get_services_description')->get();
+  $Portfolio  = NEWS::limit(4)->latest()->with('get_NEWS_description')->where('cat_id','=','3')->get();
  // $slider = slider::latest()->with('get_slider_description')->get();
   // $projects = projects::with('get_projects_description')->where('project_cat_id','=','1')->orWhere('project_cat_id','=','2')->limit(4)->get();
     
@@ -346,24 +347,50 @@ class HomeController extends Controller
 	
 	
 	
-	public function singel_services($id)
+	   public function all_services()
     {
 		
-		 $locale =\Request::segment(1) ;
+ 
+		  
+  $locale =\Request::segment(1) ;
 			App()->setLocale( $locale);
-			 
-  $services_singl = services::where('id', $id)->first();
-  
-  //dd($services_singl );
-  $services = services::with('get_services_description')->get();
-
-
-						  return view('main.services',
+  $services = services::latest()->with('get_services_description')->get();
+ 
+		   return view('main.all_services',
             [
-                 'services_singl' => $services_singl, 
-                 'services' => $services 
-            ]);
+ 			  'services' => $services ,  ]);
+			 
     }
+	
+ 
+	
+	  public function singel_services($slg,$id)
+    {
+		
+ //dd($id);
+ 
+   $locale =\Request::segment(1) ;
+			App()->setLocale( $locale);
+			
+      $services_singl = services::with('get_services_description')->with('get_services_Photos')  ->where('id', $id)->get();
+  
+// dd( $NEWS[0]->get_NEWS_description[0]->slug );
+                if (!is_null($services_singl)) {
+                 		 return view('main.singel_services',
+                        [ 
+						
+						
+ 						'services_singl' => $services_singl,
+ 						
+						
+						]);
+                } else {
+                   // return redirect('/');
+
+                }
+		  }
+		  
+		  
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		

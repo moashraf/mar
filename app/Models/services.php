@@ -29,13 +29,13 @@ class services extends Model
 
     protected $dates = ['deleted_at'];
 	
-    public $fillable = [
-        'image',
+  public $fillable = [
+        'single_photo',
+        'cat_id',
+        'tag_id',
         'icon',
-        'services_main_or_children_id',
-		
-        'status' 
-    ];
+     ];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -54,18 +54,20 @@ class services extends Model
      * @var array
      */
     public static $rules = [
-      //  'image' => 'required',
-     // 'icon' => 'required',
-        // 'status' => 'required'
+ 
 		
-		
-       'image' => 'mimes:jpeg,jpg,png,gif',
-        'icon' => 'mimes:jpeg,jpg,png,gif',   
+       'single_photo' => 'mimes:jpeg,jpg,png,gif',
+       // 'icon' => 'mimes:jpeg,jpg,png,gif',   
     ];
 
 	
 	
-	
+		  public function get_services_Photos()
+    {
+        return $this->hasMany('App\Models\services_photo', 'services_id');
+
+    }
+		
 	
 	public function parent_category() {
         return $this->belongsTo(self::class, 'services_main_or_children_id', 'id');
@@ -80,9 +82,15 @@ class services extends Model
  
 	   public function get_services_path()
 {
-      
-  $locale = App::getLocale(); 
-  return   \URL::to($locale.'/services/').'/'.$this->id;
+   
+  
+  $locale = App::getLocale();
+   $NEWS = services::with('get_services_description')->where('id', $this->id)->get();
+  
+         return \URL::to($locale.'/singel_services/').'/' .$NEWS[0]->get_services_description[0]->slug.'/'.$this->id ;
+
+
+
 
 		}
 

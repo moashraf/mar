@@ -1,45 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Requests\CreateNEWSRequest;
-use App\Http\Requests\UpdateNEWSRequest;
-use App\Repositories\NEWSRepository;
-use App\Http\Controllers\AppBaseController;
+  use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
-use Prettus\Repository\Criteria\RequestCriteria;
-use Response;
+ use Response;
  use Validator;
- use App\Models\News_en;
- use App\Models\News_ar;
- use App\Models\news_photo;
- use App\Models\categories_news;
-
+ use App\Models\categories_services_en;
+ use App\Models\categories_services_ar;
+ use App\Models\categories_services;
  
-class NEWSController extends AppBaseController
-{
-    /** @var  NEWSRepository */
-    private $nEWSRepository;
+ 
+class categories_services_Controller  extends AppBaseController
+{ 
 
-    public function __construct(NEWSRepository $nEWSRepo)
-    {
-        $this->nEWSRepository = $nEWSRepo;
-    }
 
-    /**
-     * Display a listing of the NEWS.
-     *
-     * @param Request $request
-     * @return Response
-     */
     public function index(Request $request)
     {
-        $this->nEWSRepository->pushCriteria(new RequestCriteria($request));
-        $nEWS = $this->nEWSRepository->all();
-
+        $categories_services = categories_services::all();
+dd($categories_services);
         return view('n_e_w_s.index')
-            ->with('nEWS', $nEWS);
+            ->with('categories_services', $categories_services);
     }
 
     /**

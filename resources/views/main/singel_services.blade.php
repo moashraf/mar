@@ -2,12 +2,12 @@
 @section('content') 
 
 
-@foreach(  $NEWS  as  $NEWS_val)
+@foreach(  $services_singl  as  $NEWS_val)
 
-	@foreach(  $NEWS_val->get_NEWS_description  as  $NEWS_val_dec)
+	@foreach(  $NEWS_val->get_services_description  as  $NEWS_val_dec)
 								
 								
-		<title> {{  $NEWS_val_dec->title}}  |    {!! site_settings('Web_site_name')  !!}  </title>
+		<title> {!! site_settings('Web_site_name')  !!} | {{  $NEWS_val_dec->title}}   </title>
 
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:title" content=" {{  $NEWS_val_dec->seo_title}}  " />
 <meta property="og:description" content="{{  $NEWS_val_dec->meta_description}} " />
-<meta property="og:url" content="{!! $NEWS_val->get_NEWS_path()  !!}" />
+<meta property="og:url" content="{!! $NEWS_val->get_services_path()  !!}" />
 <meta property="og:site_name" content="Mar Decor" />
 <meta property="article:tag" content=" {{  $NEWS_val_dec->seo_title}} " />
 <meta property="article:section" content="" />
@@ -46,7 +46,7 @@
 									<a   title="{{ trans('langsite.Home')}}" href="{{ URL::to('/')  }}">{{ trans('langsite.Home')}}</a>
 								</li>
 								<li>
-									<a  title=" {{ trans('langsite.News')}}" href="#">{{ trans('langsite.News')}}</a>
+									<a  title=" {{ trans('langsite.services')}}" href="#">{{ trans('langsite.services')}}</a>
 								</li>
 								<li class="active"> {{  $NEWS_val_dec->title}}     </li>
 							</ol>
@@ -69,7 +69,7 @@
 							class="img-responsive" alt="{{  $NEWS_val_dec->main_img_alt}} ">
 							
 							<h2>  {{  $NEWS_val_dec->title}}    </h2>
-							<h1 style="    display: none;">  {{  $NEWS_val_dec->seo_title}}    </h1>
+							<h1     style="    display: none;" >  {{  $NEWS_val_dec->seo_title}}    </h1>
 
 						<div class="latest-blog-post-date-2  text-cap">
 							<span class="month">{{  $NEWS_val_dec->created_at}}   </span>
@@ -108,9 +108,9 @@
 					              </div>
 			              		  <div id="owl-team-3-columns" class="owl-carousel owl-theme clearfix">
 						            
-								@foreach(  $NEWS  as  $NEWS_val)
+								@foreach(  $services_singl  as  $NEWS_val)
 
-								@foreach(  $NEWS_val->get_News_Photos  as  $get_News_Photos_dec)
+								@foreach(  $NEWS_val->get_services_Photos  as  $get_News_Photos_dec)
 
 			
 				<div class="item-team">

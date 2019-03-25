@@ -15,6 +15,8 @@ use Response;
 use App\Models\services_ar;
 use App\Models\services_en;
 use App\Models\services;
+use App\Models\categories_services;
+use App\Models\services_photo;
 
 class servicesController extends AppBaseController
 {
@@ -48,9 +50,10 @@ class servicesController extends AppBaseController
     public function create()
     {
 		
-		 $services_main = services::where('services_main_or_children_id','=','0')->get();
+		 $categories = categories_services::with('get_categories_services_ar_description')->get();
+		// dd($categories);
          return view('services.create')
-            ->with('services_main', $services_main);
+            ->with('categories', $categories);
 			
 			
      }
@@ -66,14 +69,21 @@ class servicesController extends AppBaseController
     {
 		
 		
-	$validator = Validator::make($request->all(), [
+		$validator = Validator::make($request->all(), [
+            'meta_description_en' => 'required',
+            'main_img_alt_en' => 'required',
+            'main_img_alt_ar' => 'required',
+            'meta_description_ar' => 'required',
+            'title_en' => 'required',
+            'slug_en' => 'required',
+            'description_en' => 'required',
+			  'title_ar' => 'required',
             'slug_ar' => 'required',
             'description_ar' => 'required',
-            'title_ar' => 'required',
-			  'slug_en' => 'required',
-            'description_en' => 'required',
-            'title_en' => 'required',
          ]);
+		 
+		  	/*  --------------------------------------------------------------------------*/ 
+
 
         if ($validator->fails()) {
             return redirect('admin/services/create')
@@ -83,26 +93,32 @@ class servicesController extends AppBaseController
 		
 		
 		
-		
-		
-  $input = $request->all();
-        if (!empty($input['image'])) {
-            $photoexplode = $request->image->getClientOriginalName();
+		 	/*  --------------------------------------------------------------------------*/ 
+
+   		
+      $input = $request->all();
+	   	/*  --------------------------------------------------------------------------*/ 
+
+        if (!empty($input['single_photo'])) {
+            $photoexplode = $request->single_photo->getClientOriginalName();
        $photoexplode = explode(".", $photoexplode);
        $namerand = rand();
        $namerand.= $photoexplode[0];
-       $imageNameGallery = $namerand . '.' . $request->image->getClientOriginalExtension();
-       $request->image->move(base_path() . '/public/images/', $imageNameGallery);
-       $input['image']=    $imageNameGallery; 
+       $imageNameGallery = $namerand . '.' . $request->single_photo->getClientOriginalExtension();
+       $request->single_photo->move(base_path() . '/public/images/', $imageNameGallery);
+       $input['single_photo']=    $imageNameGallery; 
       
        
        }else{
-       $input['image']=    'logo.png'; 
+       $input['single_photo']=    'logo.png'; 
            
        }
-
 	   
-	   if (!empty($input['icon'])) {
+
+	    	/*  --------------------------------------------------------------------------*/ 
+
+	  if (!empty($input['icon'])) {
+			  //dd("fdfdf");
             $photoexplode = $request->icon->getClientOriginalName();
        $photoexplode = explode(".", $photoexplode);
        $namerand = rand();
@@ -116,34 +132,67 @@ class servicesController extends AppBaseController
        $input['icon']=    'logo.png'; 
            
        }
-
 	   
+	   	    	/*  --------------------------------------------------------------------------*/ 
+ 
 	   
 	   $input['status']=1;
 		 
 
         $services = $this->servicesRepository->create($input);
-//dd( );
-		$services_ar = new services_ar;
+ 	   	    	/*  --------------------------------------------------------------------------*/ 
+
+
+	$services_ar = new services_ar;
         $services_ar->title = $request->title_ar;
+        $services_ar->status = '1';
         $services_ar->id_services =$services->id;
+        $services_ar->meta_description = $request->meta_description_ar;
+	   $services_ar->seo_title = $request->seo_title_ar;
+        $services_ar->main_img_alt = $request->main_img_alt_ar;
         $services_ar->description = $request->description_ar;
-        $services_ar->slug = $request->slug_ar;
+        $services_ar->slug =  str_replace(" ","_","$request->slug_ar");
         $services_ar->save();
 		
-			
-		
-		
-		
-		$services_en = new services_en;
+	 	/*  --------------------------------------------------------------------------*/ 
+
+		 	$services_en = new services_en;
         $services_en->title = $request->title_en;
+        $services_en->status = '1';
         $services_en->id_services =$services->id;
         $services_en->description = $request->description_en;
-        $services_en->slug = $request->slug_en;
+        $services_en->main_img_alt = $request->main_img_alt_en;
+		$services_en->seo_title = $request->seo_title_en;
+        $services_en->meta_description = $request->meta_description_en;
+        $services_en->slug =   str_replace(" ","_","$request->slug_en");
         $services_en->save();
+	 
 		
+		/*  --------------------------------------------------------------------------*/ 
+
 		
+        if($request->photos_id){ 
+
+
+        foreach($request->photos_id as $photo1)
+        {
+        $photoexplode = $photo1->getClientOriginalName();
+        $photoexplode = explode(".", $photoexplode);
+        $namerand = rand();
+        $namerand.= $photoexplode[0];
+        $imageNameGallery = $namerand . '.' . $photo1->getClientOriginalExtension();
+        $photo1->move(base_path() . '/public/images/', $imageNameGallery);
 		
+        $news_photo = new services_photo;
+        $news_photo->services_id = $services->id;
+        $news_photo->single_photo_gallery = "$imageNameGallery";
+        $news_photo->save();
+        }}
+
+
+ 	/*  --------------------------------------------------------------------------*/ 
+
+
 	 
 
 		
@@ -183,19 +232,26 @@ class servicesController extends AppBaseController
     {
 		
 		
-				 $services_main = services::where('services_main_or_children_id','=','0')->get();
+		 $categories = categories_services::with('get_categories_services_ar_description')->get();
+		/*  --------------------------------------------------------------------------*/ 
 
         $services = $this->servicesRepository->findWithoutFail($id);
+				/*  --------------------------------------------------------------------------*/ 
+
 		$services_ar=services_ar::where('id_services', $id)->first();
+				/*  --------------------------------------------------------------------------*/ 
+
 		$services_en=services_en::where('id_services', $id)->first();
-		//  	dd($services_ar);
-        if (empty($services)) {
+				/*  --------------------------------------------------------------------------*/ 
+
+         if (empty($services)) {
             Flash::error('Services not found');
 
             return redirect(route('services.index'));
         }
 
-        return view('services.edit')->with('services', $services)->with('services_ar', $services_ar)->with('services_en', $services_en)->with('services_main', $services_main);
+        return view('services.edit')->with('services', $services)
+		->with('services_ar', $services_ar)->with('services_en', $services_en)->with('categories', $categories);
     }
 
     /**
@@ -217,6 +273,7 @@ class servicesController extends AppBaseController
             'description_en' => 'required',
             'title_en' => 'required',
          ]);
+				/*  --------------------------------------------------------------------------*/ 
 
         if ($validator->fails()) {
             return \Redirect::back()
@@ -224,27 +281,32 @@ class servicesController extends AppBaseController
                         ->withInput();
         }
 		
-		
+						/*  --------------------------------------------------------------------------*/ 
+
 		
         $services = $this->servicesRepository->findWithoutFail($id);
+						/*  --------------------------------------------------------------------------*/ 
+
 		
-		
-			
-  $input = $request->all();
-        if (!empty($input['image'])) {
-            $photoexplode = $request->image->getClientOriginalName();
+		 $input = $request->all();
+        if (!empty($input['single_photo'])) {
+            $photoexplode = $request->single_photo->getClientOriginalName();
        $photoexplode = explode(".", $photoexplode);
        $namerand = rand();
        $namerand.= $photoexplode[0];
-       $imageNameGallery = $namerand . '.' . $request->image->getClientOriginalExtension();
-       $request->image->move(base_path() . '/public/images/', $imageNameGallery);
-       $input['image']=    $imageNameGallery; 
+       $imageNameGallery = $namerand . '.' . $request->single_photo->getClientOriginalExtension();
+       $request->single_photo->move(base_path() . '/public/images/', $imageNameGallery);
+       $input['single_photo']=    $imageNameGallery; 
       
        
        }else{
-///$input['image']=    'logo.png'; 
+      // $input['single_photo']=    'logo.png'; 
            
        }
+
+	   
+	   				/*  --------------------------------------------------------------------------*/ 
+
 	   
 	     
 	   if (!empty($input['icon'])) {
@@ -261,36 +323,67 @@ class servicesController extends AppBaseController
       // $input['icon']=    'logo.png'; 
            
        }
+ 
+	   				/*  --------------------------------------------------------------------------*/ 
 
-	   
-	   
-
-	   
-	   	$services_ar=services_ar::where('id_services', $id)->first();
-         $services_ar->title = $request->title_ar;
-        $services_ar->id_services =$services->id;
-        $services_ar->description = $request->description_ar;
-        $services_ar->slug = $request->slug_ar;
-        $services_ar->save();
-		
-		$services_en=services_en::where('id_services', $id)->first();
-         $services_en->title = $request->title_en;
-        $services_en->id_services =$services->id;
-        $services_en->description = $request->description_en;
-        $services_en->slug = $request->slug_en;
-        $services_en->save();
-		
-		
-		
-	   
 
         if (empty($services)) {
             Flash::error('Services not found');
 
             return redirect(route('services.index'));
         }
+				/*  --------------------------------------------------------------------------*/ 
 
         $services = $this->servicesRepository->update(  $input, $id);
+						/*  --------------------------------------------------------------------------*/ 
+
+		$services_ar=services_ar::where('id_services', $id)->first();
+         $services_ar->title = $request->title_ar;
+        $services_ar->status = '1';
+        $services_ar->id_services =$services->id;
+		$services_ar->main_img_alt = $request->main_img_alt_ar;
+		$services_ar->seo_title = $request->seo_title_ar;
+        $services_ar->meta_description = $request->meta_description_ar;
+        $services_ar->description = $request->description_ar;
+        $services_ar->slug =    str_replace(" ","_","$request->slug_ar")  ;
+        $services_ar->save();
+		
+			 	/*  --------------------------------------------------------------------------*/ 
+
+		$services_en=services_en::where('id_services', $id)->first();
+        $services_en->title = $request->title_en;
+        $services_en->status = '1';
+        $services_en->id_services =$services->id;
+		$services_en->main_img_alt = $request->main_img_alt_en;
+		 $services_en->seo_title = $request->seo_title_en;
+        $services_en->meta_description = $request->meta_description_en;
+        $services_en->description = $request->description_en;
+        $services_en->slug =  str_replace(" ","_"," $request->slug_en")    ;
+        $services_en->save();
+		
+		
+						/*  --------------------------------------------------------------------------*/ 
+
+		  if($request->photos_id){ 
+
+
+        foreach($request->photos_id as $photo1)
+        {
+        $photoexplode = $photo1->getClientOriginalName();
+        $photoexplode = explode(".", $photoexplode);
+        $namerand = rand();
+        $namerand.= $photoexplode[0];
+        $imageNameGallery = $namerand . '.' . $photo1->getClientOriginalExtension();
+        $photo1->move(base_path() . '/public/images/', $imageNameGallery);
+		
+        $news_photo = new services_photo;
+        $news_photo->services_id = $services->id;
+        $news_photo->single_photo_gallery = "$imageNameGallery";
+        $news_photo->save();
+        }}
+
+						/*  --------------------------------------------------------------------------*/ 
+
 
         Flash::success('Services updated successfully.');
 
@@ -327,4 +420,21 @@ class servicesController extends AppBaseController
 
         return redirect(route('services.index'));
     }
+	
+	
+	
+	
+	  public function ajax_del_services_photo($id,$services_id)
+    {
+         $services = services_photo::where('id',$id)->where('services_id',$services_id)->first();
+        
+         if (empty($services)) {
+            return back();
+        }
+        $services->delete($id);
+        return back();
+    }
+	
+	
+	
 }

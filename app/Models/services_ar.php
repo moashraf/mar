@@ -33,11 +33,15 @@ class services_ar extends Model
     protected $dates = ['deleted_at'];
 
 
-    public $fillable = [
-         'status',
+  public $fillable = [
         'title',
-        'id_services',
         'description',
+        'main_img_alt',
+	    'seo_title',
+        'meta_description',
+        'number_of_visits',
+        'id_services',
+ 	     'status',
         'slug'
     ];
 
@@ -59,12 +63,22 @@ class services_ar extends Model
      *
      * @var array
      */
-    public static $rules = [
-          'slug' => 'required',
+   public static $rules = [
+       //  'main_img_alt' => 'required',
+      //   'meta_description' => 'required',
           'title' => 'required',
-        'status' => 'required',
-        'description' => 'required'
+         'description' => 'required',
+        'slug' => 'required'
     ];
 
+
+	   public function get_NEWS_path()
+{
+        return \URL::to('/singel_services/').'/' .$this->id;
+
+		}
+		
+		
+		
     
 }

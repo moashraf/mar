@@ -29,9 +29,10 @@ Route::get('/Departments/{id}', 'ProductController@show');
 Route::get('/singel_cat/{id}', 'HomeController@singel_cat');
 Route::get('/all_news', 'HomeController@all_news');
 Route::get('/singel_news/{slg}/{id}', 'HomeController@singel_news'); 
+Route::get('/all_services', 'HomeController@all_services');
+Route::get('/singel_services/{slg}/{id}', 'HomeController@singel_services');
 Route::get('/image', 'HomeController@image');
 Route::get('/video', 'HomeController@video');
-Route::get('/services/{id}', 'HomeController@singel_services');
 Route::post('/orders', 'HomeController@orders')->name('orders');
 Route::get('/About', 'HomeController@About');
 Route::get('/Contact', 'HomeController@Contact');
@@ -52,10 +53,11 @@ Route::get('/Doctors/{id}', 'HomeController@Doctors');
 Route::get('/Departments/{id}', 'ProductController@show');
 Route::get('/singel_cat/{id}', 'HomeController@singel_cat');
 Route::get('/all_news', 'HomeController@all_news');
-Route::get('/singel_news/{slg}/{id}', 'HomeController@singel_news');
+Route::get('/singel_news/{slg}/{id}', 'HomeController@singel_news'); 
+Route::get('/all_services', 'HomeController@all_services');
+Route::get('/singel_services/{slg}/{id}', 'HomeController@singel_services');
 Route::get('/image', 'HomeController@image');
 Route::get('/video', 'HomeController@video');
-Route::get('/services/{id}', 'HomeController@singel_services');
 Route::post('/orders', 'HomeController@orders')->name('orders');
 Route::get('/About', 'HomeController@About');
 Route::get('/Contact', 'HomeController@Contact');
@@ -82,14 +84,17 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function ()
 
 Route::get('ajax_del_products/{id}/{Product_id}', 'ProductsController@ajax_del_products');
 Route::get('ajax_del_news_photo/{id}/{news_id}', 'NEWSController@ajax_del_news_photo');
+Route::get('ajax_del_services_photo/{id}/{services_id}', 'servicesController@ajax_del_services_photo');
 Route::resource('/', 'NEWSController');
 Route::resource('services', 'servicesController');
+Route::resource('categories_services', 'categories_services_Controller');
 Route::resource('products', 'ProductsController');
 Route::resource('categoriesProducts', 'Categories_ProductsController');
 Route::resource('siteStings', 'siteStingsController');
 Route::resource('sliders', 'sliderController');
 Route::resource('types', 'typesController');
 Route::resource('nEWS', 'NEWSController');
+Route::resource('categoriesNews', 'categories_newsController');
 Route::resource('clients', 'clientsController');
 Route::resource('orders', 'orderController');
 Route::resource('projects', 'projectsController');
@@ -98,11 +103,6 @@ Route::resource('requests', 'requestController');
 Route::resource('videos', 'videoController');
 Route::resource('images', 'imageController');
 Route::resource('openinghours', 'openinghoursController');
-
-
-
- 
-Route::resource('categoriesNews', 'categories_newsController');
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
