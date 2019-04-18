@@ -34,9 +34,11 @@ class categories_newsController extends AppBaseController
      */
     public function index(Request $request)
     {
+		 
         $this->categoriesNewsRepository->pushCriteria(new RequestCriteria($request));
-        $categoriesNews = $this->categoriesNewsRepository->all();
+        $categoriesNews = $this->categoriesNewsRepository->with('get_all_post_on_cat')->with('get_categories_news_ar_description')->all();
 
+ 
         return view('categories_news.index')
             ->with('categoriesNews', $categoriesNews);
     }
@@ -273,7 +275,7 @@ class categories_newsController extends AppBaseController
     public function destroy($id)
     {
 		
-				if( $id == "1" || $id == "2" || $id == "3"){dd( "لا يمكن يا حبيبي") ;}
+ 				if( $id == "1" || $id == "2" || $id == "3"){dd( " لا يمكن الحذف ") ;}
 
 
 

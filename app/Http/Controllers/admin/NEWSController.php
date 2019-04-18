@@ -35,10 +35,15 @@ class NEWSController extends AppBaseController
      */
     public function index(Request $request)
     {
+		
+		
         $this->nEWSRepository->pushCriteria(new RequestCriteria($request));
-        $nEWS = $this->nEWSRepository->all();
+        $nEWS = $this->nEWSRepository->with('get_NEWS_description')->with('get_cat')->all();
+        $categories_news = categories_news::with('get_categories_news_ar_description')->get();
+		
 
         return view('n_e_w_s.index')
+            ->with('categories_news', $categories_news)
             ->with('nEWS', $nEWS);
     }
 
@@ -52,6 +57,7 @@ class NEWSController extends AppBaseController
 		
 		
 		 $categories = categories_news::with('get_categories_news_ar_description')->get();
+		 
 // dd(  $categories->get_categories_news_ar_description);
         return view('n_e_w_s.create')
             ->with('categories', $categories);

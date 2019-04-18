@@ -32,7 +32,7 @@
 				<section>
 					<div class="sub-header sub-header-1 sub-header-contact fake-position">
 						<div class="sub-header-content">
-							<h2 class="text-cap white-text">{{ trans('langsite.Contact Us')}}</h2>
+							<h1 class="text-cap white-text">{{ trans('langsite.Contact Us')}}</h1>
 							<ol class="breadcrumb breadcrumb-arc text-cap">
 								<li>
 									<a title="{{ trans('langsite.Home')}}"  href="#">{{ trans('langsite.Home')}}</a>

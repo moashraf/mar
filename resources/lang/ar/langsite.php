@@ -17,6 +17,7 @@ return [
     'Products' => 'منتجاتنا',
     'Projects' => 'سابقة الأعمال',
     'News' => 'الأخبار',
+    'get prices' => ' احصل علي عرض السعر',
     'More' => 'المزيد',
     'Contact Us' => 'اتصل بنا  ',
     'Contact info' => 'معلومات التواصل',

@@ -21,6 +21,7 @@ return [
     'Projects' => 'Projects',
     'News' => 'News',
     'More' => 'More',
+    'get prices' => 'Get prices',
     'Contact Us' => 'Contact Us',
     'Contact info' => 'Contact info',
     'Send message to us' => 'Send message to us',

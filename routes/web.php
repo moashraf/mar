@@ -27,10 +27,10 @@ Route::get('/', 'HomeController@index');
 Route::get('/Doctors/{id}', 'HomeController@Doctors');
 Route::get('/Departments/{id}', 'ProductController@show');
 Route::get('/singel_cat/{id}', 'HomeController@singel_cat');
-Route::get('/all_news', 'HomeController@all_news');
-Route::get('/singel_news/{slg}/{id}', 'HomeController@singel_news'); 
-Route::get('/all_services', 'HomeController@all_services');
-Route::get('/singel_services/{slg}/{id}', 'HomeController@singel_services');
+Route::get('/singel_post/{slg}/{id}', 'HomeController@singel_news'); 
+Route::get('/all_news/{slg}/{id}', 'HomeController@all_news');
+Route::get('/all_services/{slg}/{id}', 'HomeController@all_services');
+Route::get('/all_Projects/{slg}/{id}', 'HomeController@all_Projects');
 Route::get('/image', 'HomeController@image');
 Route::get('/video', 'HomeController@video');
 Route::post('/orders', 'HomeController@orders')->name('orders');
@@ -52,10 +52,10 @@ Route::get('/', 'HomeController@index');
 Route::get('/Doctors/{id}', 'HomeController@Doctors');
 Route::get('/Departments/{id}', 'ProductController@show');
 Route::get('/singel_cat/{id}', 'HomeController@singel_cat');
-Route::get('/all_news', 'HomeController@all_news');
-Route::get('/singel_news/{slg}/{id}', 'HomeController@singel_news'); 
-Route::get('/all_services', 'HomeController@all_services');
-Route::get('/singel_services/{slg}/{id}', 'HomeController@singel_services');
+Route::get('/singel_post/{slg}/{id}', 'HomeController@singel_news'); 
+Route::get('/all_news/{slg}/{id}', 'HomeController@all_news');
+Route::get('/all_services/{slg}/{id}', 'HomeController@all_services');
+Route::get('/all_Projects/{slg}/{id}', 'HomeController@all_Projects');
 Route::get('/image', 'HomeController@image');
 Route::get('/video', 'HomeController@video');
 Route::post('/orders', 'HomeController@orders')->name('orders');
@@ -87,7 +87,7 @@ Route::get('ajax_del_news_photo/{id}/{news_id}', 'NEWSController@ajax_del_news_p
 Route::get('ajax_del_services_photo/{id}/{services_id}', 'servicesController@ajax_del_services_photo');
 Route::resource('/', 'NEWSController');
 Route::resource('services', 'servicesController');
-Route::resource('categories_services', 'categories_services_Controller');
+Route::resource('categoriesServices', 'categories_servicesController');
 Route::resource('products', 'ProductsController');
 Route::resource('categoriesProducts', 'Categories_ProductsController');
 Route::resource('siteStings', 'siteStingsController');
@@ -106,6 +106,10 @@ Route::resource('openinghours', 'openinghoursController');
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 
 

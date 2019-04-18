@@ -2,7 +2,6 @@
 @section('content')
    
   
-				<title> {!! site_settings('Web_site_name')  !!}   {{ trans('langsite.News')}}  </title>
 	
                
 				 
@@ -26,23 +25,30 @@
 						<div class="row">
 							<div class="col-md-12">
 							
+								@foreach($categories_news as $categories_news_val)
+
+															@foreach(  $categories_news_val->get_categories_news_ar_description  as  $categoriess_val_dec)
+	 	<title> {!! site_settings('Web_site_name')  !!}   /{{ $categoriess_val_dec->title }}</title>
+
+				      <h1  style=" display: none; " > {{  $categoriess_val_dec->seo_title}}  </h1>
+										
 			 <meta charset="UTF-8">
 			 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="author" content=" mar-decor  ">
-  <meta name="description" content=" {!! site_settings('home_seo_description')  !!}  "/>
- <meta name="Keywords" content="{!! site_settings('home_seo_description')  !!}  "/>
+  <meta name="description" content="  {{ $categoriess_val_dec->meta_description }} "/>
+ <meta name="Keywords" content=" {{ $categoriess_val_dec->seo_title }}  "/>
  <meta property="og:locale" content="<?php  echo App::getLocale() ; ?>" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content=" {!! site_settings('Web_site_name')  !!} " />
-<meta property="og:description" content="{!! site_settings('home_seo_description')  !!}  " />
+<meta property="og:title" content="  {{ $categoriess_val_dec->seo_title }}  " />
+<meta property="og:description" content=" {{ $categoriess_val_dec->meta_description }}  " />
 <meta property="og:url" content="{{ URL::to('/') }}" />
 <meta property="og:site_name" content="Mar Decor" />
-<meta property="article:tag" content="  {!! site_settings('Web_site_name')  !!} " />
-<meta property="article:section" content="" />
-<meta property="article:published_time" content="" />
-<meta property="article:modified_time" content="" />
-<meta property="og:updated_time" content="" />
+<meta property="article:tag" content="  {{ $categoriess_val_dec->meta_description }} " />
+<meta property="article:section" content=" {{ $categoriess_val_dec->meta_description }} " />
+<meta property="article:published_time" content="{{ $categoriess_val_dec->created_at }}" />
+<meta property="article:modified_time" content=" {{ $categoriess_val_dec->created_at }} " />
+<meta property="og:updated_time" content="  {{ $categoriess_val_dec->created_at }}  " />
 <meta property="og:image" content="{{ URL::to('/').'/images/mar2.png '}}" />
 <meta property="og:image:secure_url" content="{{ URL::to('/').'/images/mar2.png '}}" />
 <meta property="og:image:width" content="900" />
@@ -53,6 +59,9 @@
 <meta name="twitter:image" content="{{ URL::to('/').'/images/mar2.png '}}" />
 <meta name="twitter:site" content="@mar-decor" />  
 
+
+																		 @endforeach
+									 @endforeach
 
 
 								<div class="blog-list">

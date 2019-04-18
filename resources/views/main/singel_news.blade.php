@@ -45,9 +45,7 @@
 								<li>
 									<a   title="{{ trans('langsite.Home')}}" href="{{ URL::to('/')  }}">{{ trans('langsite.Home')}}</a>
 								</li>
-								<li>
-									<a  title=" {{ trans('langsite.News')}}" href="#">{{ trans('langsite.News')}}</a>
-								</li>
+								 
 								<li class="active"> {{  $NEWS_val_dec->title}}     </li>
 							</ol>
 						</div>

@@ -18,7 +18,7 @@ class projects_cat extends Model
 {
     use SoftDeletes;
 
-    public $table = 'projects_cats';
+    public $table = 'categories_project';
     
 
     protected $dates = ['deleted_at'];

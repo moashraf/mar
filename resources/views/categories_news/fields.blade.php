@@ -20,14 +20,13 @@
     {!! Form::label('parentid', 'Parent :') !!}
 
 <select class="form-control" name="parentid">
- 
-  <option value="1" selected = selected >Main</option>
   
+   
    @foreach($categories as $category)
             <option  
 			<?php if (isset($categoriesNews )) { if($category->id == $categoriesNews->parentid ){    echo'selected = selected' ;} } ?>	
 			
-			style="<?php  if($category->parentid == 1 ){    echo'color: #dd4b39;  font-weight: bold;' ;} ?>  "
+			style="<?php  if($category->parentid ==  0 ){    echo'color: #dd4b39;  font-weight: bold;' ;} ?>  "
 	value="{{$category->id}}">  {{$category->get_categories_news_ar_description[0]['title']}} </option>
         @endforeach
 		

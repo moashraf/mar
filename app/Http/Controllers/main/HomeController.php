@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
  use App\Models\slider;
  use App\Models\order;
  use App\Models\services;
+ use App\Models\categories_news;
  
 use Illuminate\Http\Request;
 
@@ -22,8 +23,8 @@ class HomeController extends Controller
 		 
 		 
   $slider  = slider::limit(5)->latest()->with('get_slider_description')->get();
-  $NEWS  = NEWS::limit(3)->latest()->with('get_NEWS_description')->where('cat_id','=','1')->get();
-  $services  = services::limit(4)->latest()->with('get_services_description')->get();
+  $NEWS  = NEWS::limit(3)->latest()->with('get_NEWS_description')->where('cat_id','=','2')->get();
+  $services  =  NEWS::limit(4)->latest()->with('get_NEWS_description')->where('cat_id','=','1')->get();
   $Portfolio  = NEWS::limit(4)->latest()->with('get_NEWS_description')->where('cat_id','=','3')->get();
  // $slider = slider::latest()->with('get_slider_description')->get();
   // $projects = projects::with('get_projects_description')->where('project_cat_id','=','1')->orWhere('project_cat_id','=','2')->limit(4)->get();
@@ -194,18 +195,20 @@ class HomeController extends Controller
 	
 	
 	
-	   public function all_news()
+	   public function all_news($slg,$id)
     {
 		
  
 		  
-  $locale =\Request::segment(1) ;
+			$locale =\Request::segment(1) ;
 			App()->setLocale( $locale);
-  $NEWS = NEWS::latest()->with('get_NEWS_description')->get();
+			 $NEWS = NEWS::latest()->with('get_NEWS_description')->where('cat_id',$id)->get();
+			$categories_news = categories_news::where('id',$id)->get();	
+
  
-  		  
 		   return view('main.all_news',
             [
+ 				                  'categories_news' => $categories_news ,
  				                  'NEWS' => $NEWS ,
  
 				 ]);
@@ -311,13 +314,18 @@ class HomeController extends Controller
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	
-	  public function all_projects($id)
+	  public function all_projects($slg,$id)
     {
 
-	$projects = projects::with('get_projects_description')->where('project_cat_id','=',$id)->get();
-		 return view('main.all_projects',
+	         $locale =\Request::segment(1) ;
+			App()->setLocale( $locale);
+			 $NEWS = NEWS::latest()->with('get_NEWS_description')->where('cat_id',$id)->get();
+			$categories_news = categories_news::where('id',$id)->get();	
+
+			return view('main.all_projects',
             [
-                  'projects' => $projects 
+                  'categories_news' => $categories_news ,
+                  'NEWS' => $NEWS 
             ]);
     }
 	
@@ -347,18 +355,24 @@ class HomeController extends Controller
 	
 	
 	
-	   public function all_services()
+	   public function all_services($slg,$id)
     {
 		
  
-		  
-  $locale =\Request::segment(1) ;
+		
+
+			$locale =\Request::segment(1) ;
 			App()->setLocale( $locale);
-  $services = services::latest()->with('get_services_description')->get();
+			 $NEWS = NEWS::latest()->with('get_NEWS_description')->where('cat_id',$id)->get();
+			$categories_news = categories_news::where('id',$id)->get();	
+
  
+  
 		   return view('main.all_services',
             [
- 			  'services' => $services ,  ]);
+ 			  'categories_news' => $categories_news ,  
+ 			  'NEWS' => $NEWS ,  
+			  ]);
 			 
     }
 	

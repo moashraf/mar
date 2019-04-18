@@ -27,6 +27,7 @@
 <meta name="twitter:title" content=" {!! site_settings('home_seo_description')  !!} " />
 <meta name="twitter:image" content="{{ URL::to('/').'/images/mar2.png '}}" />
 <meta name="twitter:site" content="@mar-decor" />
+
 <section>
    <div class="rev_slider_wrapper">
       <!-- START REVOLUTION SLIDER 5.0 auto mode -->
@@ -131,7 +132,7 @@
          <!-- End Title -->
          <div class="row">
             @foreach(  $services as  $NEWs_val)
-            <a title="{{  $NEWs_val->single_photo}}"  href="{!! $NEWs_val->get_services_path()  !!}">
+            <a title="{{  $NEWs_val->single_photo}}"  href="{!! $NEWs_val->get_NEWS_path()  !!}">
                <div class="col-md-6">
                   <div class="block-img-right text-right">
                      <div class="img-block">
@@ -139,7 +140,7 @@
                            alt="{!! site_settings('Web_site_name')  !!}" >
                      </div>
                      <div class="text-box">
-                        @foreach(  $NEWs_val->get_services_description  as  $NEWs_val_dec)
+                        @foreach(  $NEWs_val->get_NEWS_description  as  $NEWs_val_dec)
                         <h4 class="text-cap"><mark>{!!   $NEWs_val_dec->title  !!}</mark>  </h4>
                         <p>	  {!!   $NEWs_val_dec->seo_title  !!} </p>
                         @endforeach

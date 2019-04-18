@@ -2,6 +2,7 @@
 <html lang="">
    <head>
       <meta name="robots" content="index, follow">
+      <link rel="canonical" href="https://mar-decor.com/" />
       <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="{{  asset('/css/bootstrap.min.css') }}  ">
@@ -40,15 +41,15 @@
             <!-- Mobile Menu -->
             <div class="mCustomScrollbar light" data-mcs-theme="minimal-dark">
                <ul class="navi-level-1 hover-style-2 main-navi">
-                  <li class="has-sub"><a   title="{{ trans('langsite.Home')}}" href="{{ URL::to('/').'/'.App::getLocale() }}"><span>{{ trans('langsite.Home')}}</span></a>
+                  <li class="has-sub"><a   title="{{ trans('langsite.Home')}}" href="{{ URL::to('/').'/'.App::getLocale() }}"><span>{{ trans('langsite.Home')}}</span> </a>
                   </li>
                   <li class="has-sub"><a   title="{{ trans('langsite.Home')}}" href="{{ URL::to('/').'/'.App::getLocale().'/About/'}}"><span>{{ trans('langsite.About')}}</span></a>
                   </li>
-                  <li class="has-sub"><a  title="{{ trans('langsite.Home')}}"  href="{{ URL::to('/').'/'.App::getLocale().'/all_services/'}}"><span>{{ trans('langsite.services')}}</span></a>
+                  <li class="has-sub"><a  title="{{ trans('langsite.Home')}}"  href="{{ URL::to('/').'/'.App::getLocale().'/all_services/'.trans('langsite.services').'/3/'}}"><span>{{ trans('langsite.services')}}</span></a>
                   </li>
-                  `							
-                  <li class="has-sub"><a   title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale().'/all_news/'}}"><span>{{ trans('langsite.Projects')}}</span></a></li>
-                  <li class="has-sub"><a href="{{ URL::to('/').'/'.App::getLocale().'/all_news/'}}"><span>{{ trans('langsite.News')}}</span></a>
+                						
+                  <li class="has-sub"><a   title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale().'/all_news/'.trans('langsite.Projects').'/3/'}}"><span>{{ trans('langsite.Projects')}}</span></a></li>
+                  <li class="has-sub"><a href="{{ URL::to('/').'/'.App::getLocale().'/all_news/'.trans('langsite.News').'/3/'}}"><span>{{ trans('langsite.News')}}</span></a>
                   </li>
                   <li class="has-sub"><a  title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale().'/Contact/'}}"><span>{{ trans('langsite.Contact Us')}}</span></a>
                   </li>
@@ -109,14 +110,22 @@
             <!-- End Right Header -->
             <nav>
                <ul class="navi-level-1 hover-style-2 main-navi nav-r">
-                  <li class="has-sub"><a  title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale()}}"><span><i class="fas fa fa-home"></i> {{ trans('langsite.Home')}}</span></a>
+                  <li class="has-sub sub"><a  title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale()}}"><span><i class="fas fa fa-home"></i> {{ trans('langsite.Home')}} </span> </a>
+                  
+				    <!-- End Right Header 
+                  <div class="dropdown none">
+                      <a href="#">link one</a>
+                      
+                      <a href="#">link two</a>
+                  </div>
+				  -->
                   </li>
                   <li class="has-sub"><a  title="{!! site_settings('Web_site_name')  !!} " href=" {{ URL::to('/').'/'.App::getLocale().'/About/'}}"><span><i class="fas fa fa-flag"></i> {{ trans('langsite.About')}}</span></a>
                   </li>
-                  <li class="has-sub"><a  title="{!! site_settings('Web_site_name')  !!} "  href="{{ URL::to('/').'/'.App::getLocale().'/all_services/'}}"><span><i class="fas fa fa-check"></i> {{ trans('langsite.services')}}</span></a>
+                  <li class="has-sub"><a  title="{!! site_settings('Web_site_name')  !!} "  href="{{ URL::to('/').'/'.App::getLocale().'/all_services/'.trans('langsite.services').'/1/'}}"><span><i class="fas fa fa-check"></i> {{ trans('langsite.services')}}</span></a>
                   </li>
-                  <li class="has-sub"><a   title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale().'/all_news/'}}"><span><i class="fas fa fa-briefcase"></i> {{ trans('langsite.Projects')}}</span></a></li>
-                  <li class="has-sub"><a   title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale().'/all_news/'}}"><span>
+                  <li class="has-sub"><a   title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale().'/all_Projects/'.trans('langsite.Projects').'/3/'}}"><span><i class="fas fa fa-briefcase"></i> {{ trans('langsite.Projects')}}</span></a></li>
+                  <li class="has-sub"><a   title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale().'/all_news/'.trans('langsite.News').'/2/'}}"><span>
                      <i class="fas fa fa-file"></i> {{ trans('langsite.News')}}</span></a>
                   </li>
                   <li class="has-sub"><a   title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale().'/Contact/'}}"><span><i class="fas fa fa-mobile"></i> {{ trans('langsite.Contact Us')}}</span></a>
@@ -129,7 +138,11 @@
                   <li class="has-sub"><a  title="{!! site_settings('Web_site_name')  !!} "  href="{{ URL::to('/').'/en/' }}"><span>
                      <i class=" "></i>   English  </span></a>
                   </li>
+                  
+                  
                   <?php  }    ?>
+                  <li class="has-sub header-mobile"><a   title="{!! site_settings('Web_site_name')  !!} " href="tel:01127582895/01092211824"><span><i class="fas fa fa-mobile"></i>  {{ trans('langsite.get prices')}}</span></a>
+                  </li>
                </ul>
             </nav>
             <!-- End Nav -->
@@ -186,16 +199,18 @@
          <!-- End Left Footer -->
          <nav class="nav-r">
             <ul>
+                    <li class="has-sub header-mobile"><a   title="{!! site_settings('Web_site_name')  !!} " href="tel:01127582895/01092211824"><span><i class="fas fa fa-mobile"></i> 01127582895/01092211824</span></a>
+                  </li>
                <li class="has-sub"><a   title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale() }}"><span>{{ trans('langsite.Home')}}</span></a>
                </li>
                <li class="has-sub"><a  title="{!! site_settings('Web_site_name')  !!} "  href="{{ URL::to('/').'/'.App::getLocale().'/About/'}}"><span>{{ trans('langsite.About')}}</span></a>
                </li>
-               <li class="has-sub"><a  title="{!! site_settings('Web_site_name')  !!} "  href="{{ URL::to('/').'/'.App::getLocale().'/all_services/'}}"><span>{{ trans('langsite.services')}}</span></a>
-               </li>
-               `							
-               <li class="has-sub"><a   title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale().'/all_news/'}}"><span>{{ trans('langsite.Projects')}}</span></a></li>
-               <li class="has-sub"><a  title="{!! site_settings('Web_site_name')  !!} "  href="{{ URL::to('/').'/'.App::getLocale().'/all_news/'}}"><span>{{ trans('langsite.News')}}</span></a>
-               </li>
+                <li class="has-sub"><a  title="{{ trans('langsite.Home')}}"  href="{{ URL::to('/').'/'.App::getLocale().'/all_services/'.trans('langsite.services').'/3/'}}"><span>{{ trans('langsite.services')}}</span></a>
+                  </li>
+                						
+                  <li class="has-sub"><a   title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale().'/all_news/'.trans('langsite.Projects').'/3/'}}"><span>{{ trans('langsite.Projects')}}</span></a></li>
+                  <li class="has-sub"><a href="{{ URL::to('/').'/'.App::getLocale().'/all_news/'.trans('langsite.News').'/3/'}}"><span>{{ trans('langsite.News')}}</span></a>
+                  </li>
                <li class="has-sub"><a   title="{!! site_settings('Web_site_name')  !!} " href="{{ URL::to('/').'/'.App::getLocale().'/Contact/'}}"><span>{{ trans('langsite.Contact Us')}}</span></a>
                </li>
             </ul>

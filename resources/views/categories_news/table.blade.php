@@ -1,17 +1,32 @@
+
 <table class="table table-responsive" id="categoriesNews-table">
     <thead>
         <tr>
          <th>Single Photo</th>
-        <th>created_at</th>
+         <th>post</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
     @foreach($categoriesNews as $categoriesNews)
         <tr>
-    <td>     <img src="{{ URL::to('/').'/images/'.$categoriesNews->single_photo}}"  width="50" height="50">  </td>
+    <td>   
+   @foreach($categoriesNews->get_categories_news_ar_description   as $description )
+   {{ $description->title}}
+ @endforeach
+	</td>
 
-            <td>{!! $categoriesNews->created_at !!}</td>
+             <td> 
+			    @foreach($categoriesNews->get_all_post_on_cat   as $post)
+				
+				<a  href="https://mar-decor.com/admin/nEWS/{{ $post->id }}/edit"> 
+				<img src="{{ URL::to('/').'/images/'.$post->single_photo}}"  width="50" height="50">  
+				</a>
+				
+				
+				
+			   @endforeach
+			</td>
             <td>
                 {!! Form::open(['route' => ['categoriesNews.destroy', $categoriesNews->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

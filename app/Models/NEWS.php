@@ -68,14 +68,20 @@ class NEWS extends Model
    $NEWS = NEWS::with('get_NEWS_description')->where('id', $this->id)->get();
   
  //dd( $NEWS[0]->get_NEWS_description[0]->slug );
-        return \URL::to($locale.'/singel_news/').'/' .$NEWS[0]->get_NEWS_description[0]->slug.'/'.$this->id ;
+        return \URL::to($locale.'/singel_post/').'/' .$NEWS[0]->get_NEWS_description[0]->slug.'/'.$this->id ;
 
 		}
 		
 		
 		
 		
-		
+		public function get_cat() {
+        return $this->belongsTo('App\Models\categories_news', 'cat_id', 'id');
+    }
+
+   
+	
+	
 		
 		  public function get_NEWS_description()
 {
